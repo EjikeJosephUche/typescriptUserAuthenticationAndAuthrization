@@ -4,15 +4,30 @@
 
 This is a simple Note Management application built using Node.js, Typescript, Express, and MongoDB. The application allows you to create, read, update, and delete notes. The project is structured with a Model-View-Controller (MVC) architecture, using Mongoose as the Object Document Modelling (ODM) for MongoDB.
 
-### API ENDPOINTS
-| Method	| Endpoint	                      | Description
-| POST	  | /api/users/login	              | User login (generates JWT token)
-| POST	  | /api/notes	                    | Create a new note (Requires JWT)
-| GET	    | /api/notes	                    | Retrieve all notes (Requires JWT)
-| GET	    | /api/notes/:id	                | Retrieve a single note by ID (Requires JWT)
-| PUT	    | /api/notes/:id	                | Update an existing note (Requires JWT)
-| DELETE	| /api/notes/:id	                | Delete a note (Requires JWT)
-| GET	    | /api/notes/categories/:category	| Get notes by category (Requires JWT)
+## STEPS ON USING THE APP
+- clone the app
+- run `npm install` on your commandline
+- provide .env file with 2 properties
+  - DB_URI=[Your mongoDB URI]
+  - JWT_SECRET=[your JWT secret]
+- run `npm run build`
+- run `npm run start`
+- create a user using the `/api/users/register` endpoint in postman
+- login and it will generate a token which you will attach to the Authorization header when making requests to other protected endpoints
+- copy the token, go the Authorization tab, select `Bearer token`, and paste the token
+- Now you can perform various CRUD operations in your code and it will return just the one belonging to you
+
+## API SUMMARY OF ENDPOINTS
+| Method	| Endpoint	                      | Description                                 | Protected |
+|---------|---------------------------------|---------------------------------------------|-----------|
+| POST    | /api/users/register             | User creates an account                     | false     |
+| POST	  | /api/users/login	              | User login (generates JWT token)            | false     |
+| POST	  | /api/notes	                    | Create a new note (Requires JWT)            | true      |
+| GET	    | /api/notes	                    | Retrieve all notes (Requires JWT)           | true      |
+| GET	    | /api/notes/:id	                | Retrieve a single note by ID (Requires JWT) | true      |
+| PUT	    | /api/notes/:id	                | Update an existing note (Requires JWT)      | true      |
+| DELETE	| /api/notes/:id	                | Delete a note (Requires JWT)                | true      |
+| GET	    | /api/notes/categories/:category	| Get notes by category (Requires JWT)        | true      |
 
 ### Features
 - `Create a new note:` Create a new note associated with the authenticated user.
@@ -29,13 +44,24 @@ This is a simple Note Management application built using Node.js, Typescript, Ex
 
 - `JWT Authentication:` Users can log in, receive a JWT token, and use it to access protected routes and manage their notes.
 
+## Note Model
+
+Each note contains:
+
+- `_id`: Unique identifier (auto-generated)
+- `userId`: Unique identifier of the owner (auto-generated from Users model)
+- `title`: Note title (required, max 100 characters)
+- `content`: Note content (required)
+- `createdAt`: Timestamp of creation (auto-generated)
+- `updatedAt`: Timestamp of last update (auto-generated)
+
 ### Technologies Used
 - `Node.js:` JavaScript runtime for building the application.
 - `Express:` Web framework for handling HTTP requests and routing.
 - `MongoDB:` NoSQL database for storing the note data.
 - `Mongoose:` ODM (Object Data Modeling) library for MongoDB and Node.js.
 - `TypeScript:` For static typing and better developer experience.
-`JWT (JSON Web Tokens):` For user authentication and authorization.
+- `JWT (JSON Web Tokens):` For user authentication and authorization.
 - `Postman:` For Testing your api endpoints
 
 
@@ -115,7 +141,13 @@ The application will run on http://localhost:3000.
 - **/src:** This is the folder where all my Typescript code resides.
 - **/controllers:** Contains the controller layer that handles HTTP requests and invokes service methods to perform the necessary actions. The NoteController.ts file defines routes like getNote, getNotes, createNote, updateNote, and deleteNote.
 
+- **/interface:** contains typed interface for the various Notes and users
+
+- **/models:** contains the database logic for the users and the notes
+
 - **/models:** Contains the Mongoose schema and model. The NoteModel.ts file defines the structure of the Note document in MongoDB.
+
+- **/routes:** This is where all the various routes related to the api resides
 
 - **/services:** Contains business logic. The NoteService.ts file interacts with the NoteModel to perform database operations (e.g., findById, find, save, findByIdAndUpdate, findByIdAndDelete).
 
@@ -144,6 +176,7 @@ Use Postman, enter the link http://localhost:3000/notes
 [
   {
     "id": "60d6f4bb0d7f5b3588f36f33",
+    "userId: "60d6f4bb0d7f5b3588f363d3",
     "title": "Note 1",
     "content": "This is the first note.",
     "createdAt": "2025-03-06T10:00:00.000Z",
@@ -151,6 +184,7 @@ Use Postman, enter the link http://localhost:3000/notes
   },
   {
     "id": "60d6f4cc0d7f5b3588f36f34",
+    "userId": "60d6f4bb0d7f5b3588f363d3"
     "title": "Note 2",
     "content": "This is the second note.",
     "createdAt": "2025-03-06T11:00:00.000Z",
@@ -166,7 +200,8 @@ Body:
 
 {
   "title": "New Note",
-  "content": "This is a new note."
+  "content": "This is a new note.",
+  "category: "work"
 }
 
 **Response:**
@@ -175,6 +210,7 @@ Body:
 {
   "id": "60d6f5b0c9e77b362d88b0ab",
   "title": "New Note",
+  "category": "work",
   "content": "This is a new note.",
   "createdAt": "2025-03-06T12:00:00.000Z",
   "updatedAt": "2025-03-06T12:00:00.000Z"
@@ -196,6 +232,7 @@ Body:
 ```
 {
   "id": "60d6f4bb0d7f5b3588f36f33",
+  "userId": "60d6f4bb0d7f5b3588f363d3"
   "title": "Updated Note",
   "content": "This note has been updated.",
   "createdAt": "2025-03-06T10:00:00.000Z",
