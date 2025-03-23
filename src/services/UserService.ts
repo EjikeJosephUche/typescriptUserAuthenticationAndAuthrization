@@ -11,7 +11,7 @@ class UserService {
      async createUser (userData: IAuthRequest): Promise<IUser>{
         try{
             const {username, password} = userData;
-            // console.log(userData)
+
             const existingUser = await UserModel.exists({ username });
             if(!password){
                 throw new Error('Password is required');
@@ -29,7 +29,7 @@ class UserService {
 
             return await newUser.save();
         } catch (error) {
-            // console.log(error)
+
             throw new Error(`Error creating user: ${error instanceof Error? error.message : error}`);
         }
     }
@@ -46,12 +46,11 @@ class UserService {
             if(!isMatch){
                 throw new Error("Invalid Username or password");
             }
-            console.log("Generating token for username: ", user.username);
-            console.log("Generating token for userId: ", user.id);
+            
             const token = jwt.sign({ userId: user.id, username: user.username}, JWT_SECRET, {
                 expiresIn: '1h',
             });
-            // console.log(token)
+            
             return token;
         } catch (error){
             throw new Error ('Error logging in');

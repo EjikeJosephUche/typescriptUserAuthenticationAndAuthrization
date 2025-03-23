@@ -25,15 +25,15 @@ class UserAuthController {
     async loginUser (req: Request, res: Response){
         try{
             const userData: IAuthRequest = req.body;
-            // console.log(req)
+            
             const token = await UserService.loginUser(userData);
-            // console.log(token)
+            
             return res.status(200).json({
                 message: 'Login successful',
                 token: token,
             });
         } catch (error){
-            // console.log(error);
+            
             return res.status(400).json({
                 message: "Invalid credentials",
                 error: `${error}`

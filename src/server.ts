@@ -1,4 +1,4 @@
-import express, { Request, Response, urlencoded } from 'express';
+import express from 'express';
 import connectDB from './config/db';
 import NoteController from './controllers/noteController';
 import logRequest from './middlewares/loggingMiddleware';
@@ -8,7 +8,6 @@ import authMiddleware from './middlewares/authMiddleware';
 
 const app = express();
 
-const noteController = new NoteController();
 
 // To use json globally
 app.use(express.json());

@@ -1,16 +1,33 @@
-# typescriptRestApi
+# TYPESCRIPT REST API WITH USER AUTHENTICATION AND AUTHORIZATION
 
-## REST API For Note Management Application Using Node and Typescript
+## REST API For Note Management Application Using Node and Typescript and User Authentication and Authorization
 
 This is a simple Note Management application built using Node.js, Typescript, Express, and MongoDB. The application allows you to create, read, update, and delete notes. The project is structured with a Model-View-Controller (MVC) architecture, using Mongoose as the Object Document Modelling (ODM) for MongoDB.
 
+### API ENDPOINTS
+| Method	| Endpoint	                      | Description
+| POST	  | /api/users/login	              | User login (generates JWT token)
+| POST	  | /api/notes	                    | Create a new note (Requires JWT)
+| GET	    | /api/notes	                    | Retrieve all notes (Requires JWT)
+| GET	    | /api/notes/:id	                | Retrieve a single note by ID (Requires JWT)
+| PUT	    | /api/notes/:id	                | Update an existing note (Requires JWT)
+| DELETE	| /api/notes/:id	                | Delete a note (Requires JWT)
+| GET	    | /api/notes/categories/:category	| Get notes by category (Requires JWT)
+
 ### Features
-- Create a new note
-- Retrieve a single note
-- Retrieve all notes
-- Update an existing note
-- Delete a note
-- Retrieve notes based on a particular category
+- `Create a new note:` Create a new note associated with the authenticated user.
+
+- `Retrieve a single note:` Retrieve a specific note by ID, available only to the user who created it.
+
+- `Retrieve all notes:` Retrieve all notes created by the authenticated user.
+
+- `Update an existing note:` Update a specific note, only if you are the creator of the note.
+
+- `Delete a note:` Delete a note, but only if the note belongs to the authenticated user.
+
+- `Retrieve notes based on a particular category:` Get all notes from a specific category for the authenticated user.
+
+- `JWT Authentication:` Users can log in, receive a JWT token, and use it to access protected routes and manage their notes.
 
 ### Technologies Used
 - `Node.js:` JavaScript runtime for building the application.
@@ -18,6 +35,7 @@ This is a simple Note Management application built using Node.js, Typescript, Ex
 - `MongoDB:` NoSQL database for storing the note data.
 - `Mongoose:` ODM (Object Data Modeling) library for MongoDB and Node.js.
 - `TypeScript:` For static typing and better developer experience.
+`JWT (JSON Web Tokens):` For user authentication and authorization.
 - `Postman:` For Testing your api endpoints
 
 
@@ -32,9 +50,9 @@ If MongoDB is not installed locally, you can follow the installation instruction
 1. Clone the Repository
 First, clone the repository to your local machine using this code below:
 
-`git clone https://github.com/EjikeJosephUche/typescriptRestApi.git`
+`git clone https://github.com/EjikeJosephUche/typescriptUserAuthenticationAndAuthrization.git`
 
-`cd typescriptRestApi`
+`cd typescriptUserAuthenticationAndAuthrization`
 
 2. Install Dependencies
 Install the required dependencies using npm:
@@ -68,20 +86,28 @@ The application will run on http://localhost:3000.
 
 ### Project Structure
 ```
-/src                             # This is the source folder where all my typscript code resides
+/src                             # This is the source folder where all my TypeScript code resides
+  /config
+    - db.ts                      # The database configurations
   /controllers
     - NoteController.ts          # The Controller responsible for handling HTTP requests
+    - UserController.ts          # The Controller responsible for handling user authentication
   /middleware
-    - loggingMiddleware.ts       # this logs requests to requestLogs.txt
-    - validateNote.middleware.ts  # This validates the note before they are sent to the server
+    - loggingMiddleware.ts       # Logs requests to requestLogs.txt
+    - validateNote.middleware.ts # Validates the note before they are sent to the server
+    - authenticateJWT.ts         # Middleware for authenticating JWT tokens
   /models
     - NoteModel.ts               # Mongoose schema for Note Item
+    - UserModel.ts               # Mongoose schema for User authentication
   /routes
-    - note.route.ts              # Routing for my endpoints
+    - note.route.ts              # Routing for note-related endpoints
+    - user.route.ts              # Routing for user authentication and login
   /services
-    - NoteService.ts             # This Service layer contains the logic for interacting with the Database
+    - NoteService.ts             # Service layer for interacting with the Database for notes
+    - UserService.ts             # Service layer for handling user registration, login, and JWT generation
   - db.ts                        # MongoDB connection setup
   - server.ts                    # Main application file
+
 ```
 
 ### Folder Structure Breakdown
@@ -189,6 +215,15 @@ URL Params: category=[string] (category of the notes to fetch from the database)
 
 **Response:** HTTP status code 204 No Content if the note was successfully deleted.
 
+6. Users Registeration
+URL: /api/auth/register
+Method: POST
+Response: Created Users.
+
+7. Users Login
+URL: /api/auth/login
+Method: POST
+Response: if successful, sends the token
 
 ### Contributing
 Feel free to fork the repository, open issues, and submit pull requests. Contributions are always welcome!

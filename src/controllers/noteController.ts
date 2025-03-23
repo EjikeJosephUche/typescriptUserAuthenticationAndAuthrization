@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 declare global {
     namespace Express {
         interface Request {
-            user?: { id: string; _id: string }; // Adjust this according to your user model
+           userId?: string;
         }
     }
 }
@@ -17,7 +17,7 @@ export default class NoteController {
     }
     async getNoteById(req: Request, res: Response){
         try{
-            const userId = req.user?.id;
+            const userId = req.userId;
             if (!userId){
                 return res.status(401).json({message: 'User not Authenticated'});
             }
@@ -34,7 +34,8 @@ export default class NoteController {
 
     async getNotes(req: Request, res: Response){
         try{
-            const userId = req.user?._id;
+            const userId = req.userId;
+            
             if (!userId){
                 return res.status(401).json({message: 'User not Authenticated'});
             }
@@ -48,7 +49,7 @@ export default class NoteController {
 
     async createNote(req: Request, res: Response){
         try{
-            const note = await this.noteService.createNote(req.body)
+            const note = await this.noteService.createNote(req.body, req.userId as string);
             res.status(201).json({
                 message: "Note created successfully!",
                 data: note
@@ -62,7 +63,7 @@ export default class NoteController {
     
     async deleteNote(req: Request, res: Response){
         try {
-            const userId = req.user?._id;
+            const userId = req.userId;
             if (!userId){
                 return res.status(401).json({message: 'User not Authenticated'});
             }
@@ -81,7 +82,7 @@ export default class NoteController {
     async getNotesByCategoryId(req: Request, res: Response){
         
         try{
-            const userId = req.user?._id;
+            const userId = req.userId;
             if (!userId){
                 return res.status(401).json({message: 'User not Authenticated'});
             }
@@ -102,7 +103,7 @@ export default class NoteController {
 
     async updateNote(req: Request, res: Response){
         try{
-            const userId = req.user?._id;
+            const userId = req.userId;
             if (!userId){
                 return res.status(401).json({message: 'User not Authenticated'});
             }
@@ -119,5 +120,3 @@ export default class NoteController {
     }
     
 }
-
-

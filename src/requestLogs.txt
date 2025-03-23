@@ -196,3 +196,29 @@
 2025-03-23T15:15:48.329Z - Method: POST /api/auth/login - Body: {"username":"Joseph","password":"Joseph12345"}
 2025-03-23T15:15:59.927Z - Method: POST /api/auth/login - Body: {"username":"Joseph","password":"Joseph12345"}
 2025-03-23T15:23:07.417Z - Method: GET /api/notes/ - Body: {"title":"This is updated test 3","content":"The is the content of the updated test 3","category":"Work"}
+2025-03-23T20:31:45.248Z - Method: POST /api/auth/login - Body: {"username":"Joseph","password":"Joseph12345"}
+2025-03-23T20:33:20.697Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 4","content":"The is the content of the updated test 4","category":"Work"}
+2025-03-23T20:33:20.698Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 4","content":"The is the content of the updated test 4","category":"Work"}
+2025-03-23T20:36:24.150Z - Method: POST /api/notes/ - Body: {"userId":"67deb9c3784dbe8950aea15e","title":"This is updated test 4","content":"The is the content of the updated test 4","category":"Work"}
+2025-03-23T20:36:24.150Z - Method: POST /api/notes/ - Body: {"userId":"67deb9c3784dbe8950aea15e","title":"This is updated test 4","content":"The is the content of the updated test 4","category":"Work"}
+2025-03-23T20:37:41.227Z - Method: GET /api/notes/ - Body: {"userId":"67deb9c3784dbe8950aea15e","title":"This is updated test 4","content":"The is the content of the updated test 4","category":"Work"}
+2025-03-23T21:00:03.964Z - Method: POST /api/auth/login - Body: {"username":"Joseph","password":"Joseph12345"}
+2025-03-23T21:01:05.875Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:01:05.882Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:08:00.695Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:08:00.702Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:09:52.495Z - Method: POST /api/auth/login - Body: {"username":"Joseph","password":"Joseph12345"}
+2025-03-23T21:11:55.573Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:11:55.575Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:19:02.976Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:19:02.981Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:27:32.685Z - Method: POST /api/auth/login - Body: {"username":"Joseph","password":"Joseph12345"}
+2025-03-23T21:28:09.192Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:28:09.197Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:31:32.367Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:31:32.371Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:36:41.383Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:36:41.388Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:44:28.430Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:44:28.436Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 5","content":"The is the content of the updated test 5","category":"Work"}
+2025-03-23T21:46:39.116Z - Method: POST /api/notes/ - Body: {"title":"This is updated test 6","content":"The is the content of the updated test 6","category":"Work"}
